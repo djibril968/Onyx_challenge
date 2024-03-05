@@ -148,14 +148,28 @@ SET fuel_type = CASE
 					WHEN Fuel_type = 'lpg' THEN 'LPG'
 					END 
 
-SELECT *
-FROM car_sales
-WHERE Car_name IS NOT NULL
-ORDER BY 1
+----Removing duplicates
 
-SELECT *
-FROM Car_Sales
+		with car_dup 
+		AS
+			(
+				SELECT *, 
+				ROW_NUMBER() OVER(PARTITION BY Date_listed, Car_name, Price, gearbox, PowerPs, [Mileage(km)] ORDER BY Date_listed) AS rank_
+				FROM Car_Sales
+			)
+				SELECT Date_listed, Car_name, Price, gearbox, PowerPs, [Mileage(Km)],  Rank_
+				FROM car_dup
+				WHERE rank_ >1
+				ORDER BY 1, 2, 4
 
-SELECT DISTINCT [name]
-FROM Car_Sales
-where  [name] LIKE '%!!!%'
+			DELETE 
+			FROM Car_sales
+			WHERE Car_name IN
+					(SELECT Car_name
+					FROM(
+						SELECT *,
+						ROW_NUMBER() OVER(PARTITION BY Date_listed, Car_name, Price, gearbox, PowerPs, [Mileage(km)] ORDER BY Date_listed) AS rank_
+						FROM Car_Sales
+						) d
+					WHERE d.rank_ >1
+				)
