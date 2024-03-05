@@ -173,3 +173,8 @@ SET fuel_type = CASE
 						) d
 					WHERE d.rank_ >1
 				)
+
+----droping irrelevant columns
+ALTER TABLE Car_sales
+DROP COLUMN  notRepairedDamage, nrOfPictures, DateCreated
+
