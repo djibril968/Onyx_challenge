@@ -178,3 +178,110 @@ SET fuel_type = CASE
 ALTER TABLE Car_sales
 DROP COLUMN  notRepairedDamage, nrOfPictures, DateCreated
 
+
+
+/*
+Going by the fact that car_names provided does not accurately describe the cars, I coined the proper correct car_names using the concat of Brand and model
+*/
+
+SELECT Car_name, Brand, Model, CONCAT(brand, '_', Model)
+FROM Car_Sales
+ORDER BY 1
+
+ALTER TABLE Car_sales
+ADD Car_nname VARCHAR (50)
+
+UPDATE Car_sales
+SET car_nname = CONCAT(brand, '_', Model)
+
+
+SELECT DISTINCT *
+FROM Car_sales
+
+SELECT DISTINCT Brand
+FROM Car_sales
+ORDER BY 1
+
+
+SELECT Car_name, Brand, Model, Car_nname
+FROM Car_Sales
+----WHERE Brand = 'Alfa_romeo' AND Car_name LIKE '%147%'
+WHERE  
+ORDER BY 1
+
+SELECT Car_name, Brand, Model, Car_nname
+FROM Car_Sales
+WHERE Brand = 'Alfa_romeo' AND Model IS NULL --- Car_name LIKE '%147%'
+ORDER BY 1
+
+SELECT Car_name, Brand, Model, 
+						Car_nname, 
+							CASE 
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%147%' THEN 147
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%156%' THEN 156
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%8700%' THEN 870
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%916%' THEN 916
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%145%' THEN 145
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%146%' THEN 146
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%164%' THEN 164
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%159%' THEN 159
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%162%' THEN 162
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%164%' THEN 164
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%166%' THEN 166
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%147%' THEN 147
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%900%' THEN 900
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%155%' THEN 155
+								END AS Name_01
+FROM Car_Sales
+WHERE Brand = 'Alfa_romeo' AND model IS NULL
+ORDER BY 1
+
+SELECT Car_name, Brand, Model, 
+						Car_nname, 
+UPDATE Car_Sales
+SET Model =						CASE 
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%20JT%' THEN '20JT'
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%GT%' THEN 'GTV18'
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%19%' THEN '19'
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%GTV3024%' THEN 'GTV3024'
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%GTV625%' THEN 'GTV625'
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%Schoene%' THEN 'Schoene'  
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%Verkaufe%' THEN 'Verkaufe'	
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%MITO%' THEN 'MITO'
+								ELSE 'Other'
+								END 
+WHERE Brand = 'Alfa_romeo' AND model IS NULL
+
+
+UPDATE Car_Sales
+SET Model =
+								CASE 
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%147%' THEN 147
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%156%' THEN 156
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%8700%' THEN 870
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%916%' THEN 916
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%145%' THEN 145
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%146%' THEN 146
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%164%' THEN 164
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%159%' THEN 159
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%162%' THEN 162
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%164%' THEN 164
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%166%' THEN 166
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%147%' THEN 147
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%900%' THEN 900
+								WHEN Brand = 'Alfa_romeo' AND Car_name LIKE '%155%' THEN 155
+								END 
+WHERE Brand = 'Alfa_romeo' AND model IS NULL
+ORDER BY 1
+
+
+SELECT Car_name, Brand, Model, car_nname						
+FROM Car_Sales
+WHERE Brand = 'audi' AND model IS NULL
+ORDER BY 1
+
+SELECT * FROM Car_Sales
+WHERE Model IS NULL
+ORDER BY 2
+
+
