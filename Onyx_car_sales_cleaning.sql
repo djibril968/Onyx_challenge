@@ -35,7 +35,7 @@ EXEC SP_RENAME 'Car_sales.lastSeen', 'Last_seen', 'COLUMN';
 
 
 
-------- cleaning columns
+---- cleaning columns
 
 SELECT * 
 FROM Car_Sales
